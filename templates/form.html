@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram 크롤러</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 360px;
+        }
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .card h2::before {
+            content: '📸';
+            margin-right: 6px;
+        }
+        .input-label {
+            font-size: 14px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            text-align: left;
+            display: block;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        #loading {
+            margin-top: 20px;
+            color: #888;
+            font-size: 14px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>인스타그램 정보 크롤러</h2>
+        <form action="/start" method="post" onsubmit="showLoading()">
+            <label class="input-label">Instagram 아이디</label>
+            <input type="text" name="username" required>
+            <label class="input-label">Instagram 비밀번호</label>
+            <input type="password" name="password" required>
+            <label class="input-label">타겟 계정 URL</label>
+            <input type="text" name="account_url" placeholder="https://www.instagram.com/사용자명/" required>
+            <input type="submit" value="크롤링 시작">
+        </form>
+        <div id="loading">🔄 크롤링 중입니다. 잠시만 기다려주세요...</div>
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById("loading").style.display = "block";
+        }
+    </script>
+</body>
+</html>

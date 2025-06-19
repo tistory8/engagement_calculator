@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>분석 결과</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="card">
+        <h2>참여율 분석 결과</h2>
+
+        <p><b>팔로워 수:</b> {{ followers }}</p>
+        <p><b>평균 참여율:</b> {{ average_er }}%</p>
+        <p><b>업계 평균:</b> {{ benchmark }}%</p>
+        <p><b>평가 결과:</b> {{ status }}</p>
+
+        <hr>
+        <h3>게시물별 참여율</h3>
+        <ul>
+        {% for er in engagement_rates %}
+            <li>{{ er }}%</li>
+        {% endfor %}
+        </ul>
+
+        <a href="/analysis" class="btn-primary" style="text-align:center;">🔄 다시 분석하기</a>
+    </div>
+</body>
+</html>

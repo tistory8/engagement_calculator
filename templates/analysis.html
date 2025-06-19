@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>참여율 계산기</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>
+    let postCount = 3;
+    const maxPosts = 10;
+
+    function addPostRow() {
+      if (postCount >= maxPosts) return;
+
+      const container = document.getElementById('posts-container');
+      const div = document.createElement('div');
+      div.className = 'post-block';
+
+      div.innerHTML = `
+        <label>게시물 ${postCount + 1}</label>
+        <div class="input-row">
+          <input type="number" name="likes${postCount}" placeholder="좋아요">
+          <input type="number" name="comments${postCount}" placeholder="댓글">
+        </div>
+      `;
+      container.appendChild(div);
+      postCount++;
+    }
+  </script>
+</head>
+<body>
+  <div class="card">
+    <h2>인플루언서 데이터</h2>
+    <p style="font-size:14px; color:#555;">
+      인플루언서의 최신 게시물에 대한 팔로워 수와 총 좋아요 및 댓글 수를 제공하세요.
+    </p>
+
+    <h3 style="margin-top: 30px;">엑셀 파일 업로드 (.xlsx)</h3>
+    <form action="/analyze_result" method="post" enctype="multipart/form-data">
+      <label>파일 선택</label>
+      <input type="file" name="file">
+      <input type="submit" value="분석 시작" class="btn-primary">
+      <form action="/analyze_result" method="post" enctype="multipart/form-data"></form>
+    </form>
+
+    <h3 style="margin-top: 40px;">또는 수동 입력</h3>
+    <form action="/analyze_result" method="post">
+      <label>팔로워 수:</label>
+      <input type="number" name="followers" placeholder="예: 120000" required>
+
+      <div id="posts-container">
+        {% for i in range(3) %}
+          <label>게시물 {{ i+1 }}</label>
+          <div class="input-row">
+            <input type="number" name="likes{{ i }}" placeholder="좋아요">
+            <input type="number" name="comments{{ i }}" placeholder="댓글">
+          </div>
+        {% endfor %}
+      </div>
+
+      <button type="button" onclick="addPostRow()" class="btn-primary" style="margin-top:10px; background:#eee; color:#555;">+ 게시물 추가</button>
+
+      <input type="submit" value="분석 시작" class="btn-primary">
+    </form>
+  </div>
+</body>
+</html>

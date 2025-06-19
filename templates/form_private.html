@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 필요</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="card">
+  <h2>비공개 계정 로그인</h2>
+  <form action="/start-private" method="post">
+    <input type="hidden" name="account_url" value="{{ account_url }}">
+    <label>Instagram 아이디</label>
+    <input type="text" name="login_id" required>
+    <label>Instagram 비밀번호</label>
+    <input type="password" name="login_pw" required>
+    <button type="submit">크롤링 실행</button>
+  </form>
+</div>
+</body>
+</html>
